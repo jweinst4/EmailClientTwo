@@ -35,6 +35,7 @@ import {
     Input,
     Nav,
     NavItem,
+    CardSubtitle
 } from "reactstrap";
 // core components
 import {
@@ -90,7 +91,6 @@ function Tester() {
     }
 
     const changeHandler = (event) => {
-        console.log(event.target.files[0])
         Papa.parse(event.target.files[0], {
             header: false,
             skipEmptyLines: true,
@@ -126,6 +126,7 @@ function Tester() {
                             <FormGroup>
                                 <label>Send From - Name</label>
                                 <Input
+                                    style={{ border: '1px solid black' }}
                                     defaultValue=""
                                     type="text"
                                     onChange={(e) => { setSendFromName(e.target.value) }}
@@ -136,6 +137,7 @@ function Tester() {
                             <FormGroup>
                                 <label>Send From - Email</label>
                                 <Input
+                                    style={{ border: '1px solid black' }}
                                     defaultValue=""
                                     type="text"
                                     onChange={(e) => { setSendFromEmail(e.target.value) }}
@@ -145,9 +147,10 @@ function Tester() {
                     </Row>
                     <Row>
                         <Col className="pr-1" md="5">
-                            <FormGroup>
+                            <FormGroup >
                                 <label>Subject</label>
                                 <Input
+                                    style={{ border: '1px solid black' }}
                                     defaultValue=""
                                     type="text"
                                     onChange={(e) => { setSubject(e.target.value) }}
@@ -157,9 +160,10 @@ function Tester() {
                         <Col className="px-1" md="5">
                             <FormGroup>
                                 <label>To</label>
-                                <input
+                                <Input
                                     id="fileSelect"
                                     type="file"
+                                    size='sm'
                                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                     onChange={changeHandler}
                                 />
@@ -168,14 +172,13 @@ function Tester() {
                     </Row>
                     <Row>
                         <Col md="12">
-                            <Card>
+                            <Card style={{ border: '1px solid black' }}>
                                 <CardHeader>
                                     <CardTitle tag="h5">Email Preview</CardTitle>
-                                    {/* <p className="card-category">24 Hours performance</p> */}
                                 </CardHeader>
                                 <CardBody>
                                     <br />
-                                    {subject}
+                                    <CardSubtitle tag="h5" style={{ fontWeight: 'bold' }}>{subject}</CardSubtitle>
                                     <br />
                                     {`${sendFromName ? sendFromName : ''} ${sendFromEmail ? "<" + sendFromEmail + ">" : ''}`}
                                     <br />
@@ -184,12 +187,6 @@ function Tester() {
                                         return ` ${recipient[0]} <${recipient[1]}>,`
                                     }) : null}
                                     <br />
-                                    {/* <Line
-                                    data={dashboard24HoursPerformanceChart.data}
-                                    options={dashboard24HoursPerformanceChart.options}
-                                    width={400}
-                                    height={100}
-                                /> */}
                                     <br />
                                     Hi Team,
                                     <br />
