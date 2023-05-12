@@ -35,7 +35,7 @@ import {
     Input,
     Nav,
     NavItem,
-    CardSubtitle
+    CardSubtitle,
 } from "reactstrap";
 // core components
 import {
@@ -46,12 +46,16 @@ import {
 
 import Papa from 'papaparse'
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Tester() {
     const [sendFromName, setSendFromName] = useState();
     const [sendFromEmail, setSendFromEmail] = useState();
     const [subject, setSubject] = useState();
     const [sendTo, setSendTo] = useState();
+    const [show, setShow] = useState(false);
+
 
     function sendgrid(sendFromName, sendFromEmail, subject, sendToArray) {
         console.log('send grid');
@@ -115,11 +119,24 @@ function Tester() {
         setSendFromEmail();
         setSendTo();
         setSubject();
+        setShow(true);
+        toast('You Sent An Email!', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            theme: "light",
+            type: 'success'
+        });
+
     }
 
     return (
         <>
             <div className="content">
+                <div>
+                    <ToastContainer />
+                </div>
                 <Form onSubmit={handleSubmit}>
                     <Row>
                         <Col className="pr-1" md="5">
