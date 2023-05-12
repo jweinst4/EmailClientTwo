@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/paper-dashboard-react/static/css/main.414ebf02.css",
-    "main.js": "/paper-dashboard-react/static/js/main.978e1017.js",
-    "static/media/damir-bosnjak.jpg": "/paper-dashboard-react/static/media/damir-bosnjak.efcaca50b633c2ba2ba9.jpg",
-    "static/media/clem-onojeghuo-2.jpg": "/paper-dashboard-react/static/media/clem-onojeghuo-2.d16702ce00aa38f275c0.jpg",
-    "static/media/ayo-ogunseinde-2.jpg": "/paper-dashboard-react/static/media/ayo-ogunseinde-2.f4af8f2c98f6968c5ae9.jpg",
-    "static/media/mike.jpg": "/paper-dashboard-react/static/media/mike.d34d0690a264ad046861.jpg",
-    "static/media/joe-gardner-2.jpg": "/paper-dashboard-react/static/media/joe-gardner-2.09841708956117e93a7b.jpg",
-    "static/media/nucleo-icons.eot": "/paper-dashboard-react/static/media/nucleo-icons.bd42d77b9672555647d1.eot",
-    "static/media/nucleo-icons.ttf": "/paper-dashboard-react/static/media/nucleo-icons.4466aeec3386b965a232.ttf",
-    "static/media/nucleo-icons.woff": "/paper-dashboard-react/static/media/nucleo-icons.8e954b749f951b654fc6.woff",
-    "static/media/nucleo-icons.woff2": "/paper-dashboard-react/static/media/nucleo-icons.ec16bc4cc4526801004d.woff2",
-    "static/media/logo.svg": "/paper-dashboard-react/static/media/logo.103b5fa18196d5665a7e12318285c916.svg",
-    "index.html": "/paper-dashboard-react/index.html",
-    "main.414ebf02.css.map": "/paper-dashboard-react/static/css/main.414ebf02.css.map",
-    "main.978e1017.js.map": "/paper-dashboard-react/static/js/main.978e1017.js.map"
+    "main.css": "/static/css/main.6ddfefcd.css",
+    "main.js": "/static/js/main.de354a77.js",
+    "static/media/damir-bosnjak.jpg": "/static/media/damir-bosnjak.efcaca50b633c2ba2ba9.jpg",
+    "static/media/clem-onojeghuo-2.jpg": "/static/media/clem-onojeghuo-2.d16702ce00aa38f275c0.jpg",
+    "static/media/ayo-ogunseinde-2.jpg": "/static/media/ayo-ogunseinde-2.f4af8f2c98f6968c5ae9.jpg",
+    "static/media/mike.jpg": "/static/media/mike.d34d0690a264ad046861.jpg",
+    "static/media/joe-gardner-2.jpg": "/static/media/joe-gardner-2.09841708956117e93a7b.jpg",
+    "static/media/nucleo-icons.eot": "/static/media/nucleo-icons.bd42d77b9672555647d1.eot",
+    "static/media/nucleo-icons.ttf": "/static/media/nucleo-icons.4466aeec3386b965a232.ttf",
+    "static/media/nucleo-icons.woff": "/static/media/nucleo-icons.8e954b749f951b654fc6.woff",
+    "static/media/nucleo-icons.woff2": "/static/media/nucleo-icons.ec16bc4cc4526801004d.woff2",
+    "static/media/logo.svg": "/static/media/logo.103b5fa18196d5665a7e12318285c916.svg",
+    "index.html": "/index.html",
+    "main.6ddfefcd.css.map": "/static/css/main.6ddfefcd.css.map",
+    "main.de354a77.js.map": "/static/js/main.de354a77.js.map"
   },
   "entrypoints": [
-    "static/css/main.414ebf02.css",
-    "static/js/main.978e1017.js"
+    "static/css/main.6ddfefcd.css",
+    "static/js/main.de354a77.js"
   ]
 }
