@@ -17,7 +17,7 @@
 
 */
 import Dashboard from "views/Dashboard.js";
-import Tester from "views/Tester.js";
+import SendEmail from "views/SendEmail.js";
 import Notifications from "views/Notifications.js";
 import Icons from "views/Icons.js";
 import Typography from "views/Typography.js";
@@ -35,10 +35,17 @@ var routes = [
   //   layout: "/admin"
   // },
   {
-    path: "/tester",
-    name: "Tester",
+    path: "/sendemail",
+    name: "Send Email",
     icon: "nc-icon nc-bank",
-    component: Tester,
+    component: SendEmail,
+    layout: "/admin"
+  },
+  {
+    path: "/emailmetrics",
+    name: "Email Metrics",
+    icon: "nc-icon nc-bank",
+    component: Dashboard,
     layout: "/admin"
   },
   // {

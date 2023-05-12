@@ -49,7 +49,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Tester() {
+function SendEmail() {
     const [sendFromName, setSendFromName] = useState();
     const [sendFromEmail, setSendFromEmail] = useState();
     const [subject, setSubject] = useState();
@@ -238,4 +238,4 @@ function Tester() {
     );
 }
 
-export default Tester;
+export default SendEmail;
