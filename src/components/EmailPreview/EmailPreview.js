@@ -62,6 +62,15 @@ function EmailPreview(props) {
                             <CardTitle tag="h5">Email Preview</CardTitle>
                         </CardHeader>
                         <CardBody>
+                            <br />
+                            <CardSubtitle tag="h5" style={{ fontWeight: 'bold' }}>{props.subject}</CardSubtitle>
+                            <br />
+                            {`${props.sendFromName ? props.sendFromName : ''} ${props.sendFromEmail ? "<" + props.sendFromEmail + ">" : ''}`}
+                            <br />
+                            to
+                            {props.sendTo ? props.sendTo.map((recipient, index) => {
+                                return ` ${recipient[0]} <${recipient[1]}>,`
+                            }) : null}
                             <div style={{ width: '100%', backgroundColor: 'red', height: '10px' }}></div><div style={{ textAlign: 'center' }}><img src='https://i.pcmag.com/imagery/reviews/01dP5ocnTcOaAH6ehSjwkCf-9.fit_scale.size_760x427.v1569480976.png' alt='logo' width='50%' /></div><div style={{ width: '80%', margin: 'auto', fontSize: 20 }}>Dear Last Pass User,<br /><br />We wanted to alert you that, recently, our team discovered and immediately blocked suspicious activity on our network. Some user vault data was taken including email addresses and passwords.<br /><br />To be sure that your information was NOT compromised, we have built <a href='https://www.google.com' style={{ color: 'blue', textDecoration: 'underline' }}>this secure website</a> where you can enter your last pass login information and we can tell you if your account was one that was compromised.<br /><br />We apologize for the inconvenience, but ultimately we believe this will better protect Last Pass users. Thank you for your understanding, and for using Last Pass.<br /><br />Regards,<br />The Last Pass Team<br /><br /><div style={{ margin: 'auto', textAlign: 'center', width: '20%', height: '40px', backgroundColor: 'red', color: 'white', textDecoration: 'underline', textDecorationColor: 'blue' }}>Learn More</div></div>
                         </CardBody>
                         <CardFooter>
