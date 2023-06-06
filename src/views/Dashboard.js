@@ -74,10 +74,13 @@ function Dashboard() {
 
 
   const parseEvents = (data) => {
+    const eventsSent = data.filter(item => item.event === 'sent');
     const eventsDelivered = data.filter(item => item.event === 'delivered');
     const eventsOpened = data.filter(item => item.event === 'opened');
     const eventsClicked = data.filter(item => item.event === 'clicks');
 
+    console.log(data);
+    console.log(eventsSent);
     setEventsDelivered(eventsDelivered);
     setEventsOpened(eventsOpened);
     setEventsClicked(eventsClicked);

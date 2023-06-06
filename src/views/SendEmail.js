@@ -17,33 +17,15 @@
 
 */
 import React, { useState } from "react";
-// react plugin used to create charts
-import { Line, Pie } from "react-chartjs-2";
-import { Link, useLocation } from "react-router-dom";
-// reactstrap components
 import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    CardTitle,
     Row,
     Col,
-    Button,
     FormGroup,
     Form,
     Input,
-    Nav,
-    NavItem,
-    CardSubtitle,
 } from "reactstrap";
-// core components
-import {
-    dashboard24HoursPerformanceChart,
-    dashboardEmailStatisticsChart,
-    dashboardNASDAQChart
-} from "variables/charts.js";
 
+import EmailPreview from '../components/EmailPreview/EmailPreview';
 import Papa from 'papaparse'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -54,8 +36,6 @@ function SendEmail() {
     const [sendFromEmail, setSendFromEmail] = useState();
     const [subject, setSubject] = useState();
     const [sendTo, setSendTo] = useState();
-    const [show, setShow] = useState(false);
-
 
     function sendgrid(sendFromName, sendFromEmail, subject, sendToArray) {
         console.log('send grid');
@@ -64,7 +44,7 @@ function SendEmail() {
         console.log('subj', subject)
         return new Promise((resolve, reject) => {
             axios({
-                url: "https://api.sendinblue.com/v3/smtp/email",
+                url: "https://api.brevo.com/v3/smtp/email",
                 method: "POST",
                 headers: {
                     "accept": "application/json",
@@ -77,10 +57,8 @@ function SendEmail() {
                         "email": sendFromEmail
                     },
                     "to": sendToArray,
+                    "htmlContent": "<html><body><br><div style='width:100%;background:red;height:10px'></div><div style='text-align: center;'><img src='https://i.pcmag.com/imagery/reviews/01dP5ocnTcOaAH6ehSjwkCf-9.fit_scale.size_760x427.v1569480976.png' alt='logo' width='50%' /></div><div style='width:80%;margin:auto'>Dear Last Pass User,<br><br>We wanted to alert you that, recently, our team discovered and immediately blocked suspicious activity on our network. Some user vault data was taken including email addresses and passwords.<br><br>To be sure that your information was NOT compromised, we have built <a href='https://www.google.com' style='color:blue; text-decoration:underline' }}>this secure website </a> where you can enter your last pass login information and we can tell you if your account was one that was compromised.<br><br>We apologize for the inconvenience, but ultimately we believe this will better protect Last Pass users. Thank you for your understanding, and for using Last Pass.<br><br>Regards,<br>The Last Pass Team</div><br><div style='margin:auto;text-align: center;width:100px;height:40px;background-color:red;color:white;text-decoration:underline;text-decoration-color:blue'>Learn More</div></body></html>",
                     "subject": subject,
-                    "htmlContent": `<html><head></head><body><p>Hi Team,</p>Please check out my project <a href='https://www.w3schools.com'>here</a> and let me know what you think.</p>
-                    <p>Thanks,</p><p>${sendFromName}</p></body></html>`
-
                 }
             })
                 .then(res => {
@@ -119,7 +97,6 @@ function SendEmail() {
         setSendFromEmail();
         setSendTo();
         setSubject();
-        setShow(true);
         toast('You Sent An Email!', {
             position: "top-right",
             autoClose: 3000,
@@ -187,51 +164,12 @@ function SendEmail() {
                             </FormGroup>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col md="12">
-                            <Card style={{ border: '1px solid black' }}>
-                                <CardHeader>
-                                    <CardTitle tag="h5">Email Preview</CardTitle>
-                                </CardHeader>
-                                <CardBody>
-                                    <br />
-                                    <CardSubtitle tag="h5" style={{ fontWeight: 'bold' }}>{subject}</CardSubtitle>
-                                    <br />
-                                    {`${sendFromName ? sendFromName : ''} ${sendFromEmail ? "<" + sendFromEmail + ">" : ''}`}
-                                    <br />
-                                    to
-                                    {sendTo ? sendTo.map((recipient, index) => {
-                                        return ` ${recipient[0]} <${recipient[1]}>,`
-                                    }) : null}
-                                    <br />
-                                    <br />
-                                    Hi Team,
-                                    <br />
-                                    <br /> Please check out my project <span><a href='www.google.com'>here </a></span>
-                                    and let me know what you think.
-                                    <br />
-                                    <br />
-                                    Thanks,
-                                    <br />
-                                    <br />
-                                    {sendFromName}
-                                </CardBody>
-                                <CardFooter>
-                                    <Row>
-                                        <div className="update ml-auto mr-auto">
-                                            <Button
-                                                className="btn-round"
-                                                color="primary"
-                                                type="submit"
-                                            >
-                                                Send Email
-                                            </Button>
-                                        </div>
-                                    </Row>
-                                </CardFooter>
-                            </Card>
-                        </Col>
-                    </Row>
+                    <EmailPreview
+                        subject={subject}
+                        sendFromName={sendFromName}
+                        sendFromEmail={sendFromEmail}
+                        sendTo={sendTo}
+                    />
                 </Form>
             </div>
         </>
