@@ -59,7 +59,7 @@ function EmailPreview(props) {
         let month = date.getMonth() + 1;
         let year = date.getFullYear();
 
-        let currentDate = `${day}/${month}/${year}`;
+        let currentDate = `${month}/${day}/${year}`;
 
         return (
             currentDate
@@ -288,7 +288,7 @@ function EmailPreview(props) {
                             to
                             {props.sendTo ? props.sendTo.map((recipient, index) => {
                                 return ` ${recipient[0]} <${recipient[1]}>,`
-                            }) : null}
+                            }) : props.manualRecipientName || props.manualRecipientEmail ? ` ${props.manualRecipientName ? props.manualRecipientName : null} <${props.manualRecipientEmail ? props.manualRecipientEmail : null}>` : null}
                             {props.template === 'lastPass' ? lastPass() : props.template === 'docuSign' ? docuSign() : props.template === 'microsoftOne' ? microsoftOne() : props.template === 'chase' ? chase() : null}
                         </CardBody>
                         <CardFooter>

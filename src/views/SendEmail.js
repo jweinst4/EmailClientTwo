@@ -38,7 +38,7 @@ const getTodaysDate = () => {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
 
-    let currentDate = `${day}/${month}/${year}`;
+    let currentDate = `${month}/${day}/${year}`;
 
     return (
         currentDate
@@ -59,6 +59,9 @@ function SendEmail() {
     const [subject, setSubject] = useState();
     const [sendTo, setSendTo] = useState();
     const [template, setTemplate] = useState('lastPass');
+    const [useCSVRecipientList, setUseCSVRecipientList] = useState(true);
+    const [manualRecipientName, setManualRecipientName] = useState();
+    const [manualRecipientEmail, setManualRecipientEmail] = useState();
 
     function sendgrid(sendFromName, sendFromEmail, subject, sendToArray) {
         return new Promise((resolve, reject) => {
@@ -91,6 +94,12 @@ function SendEmail() {
         })
     }
 
+    const toggleRecipientMethod = () => {
+        setUseCSVRecipientList(!useCSVRecipientList);
+        setManualRecipientName();
+        setManualRecipientEmail();
+    }
+
     const changeHandler = (event) => {
         Papa.parse(event.target.files[0], {
             header: false,
@@ -105,17 +114,33 @@ function SendEmail() {
     const handleSubmit = (event) => {
         event.preventDefault();
         event.target.reset();
-        const sendToArray = sendTo.map(recipient => {
-            return {
-                "name": recipient[0],
-                "email": recipient[1]
-            }
-        })
+        let sendToArray = [];
+        if (sendTo) {
+            sendToArray = sendTo.map(recipient => {
+                return {
+                    "name": recipient[0],
+                    "email": recipient[1]
+                }
+            })
+        }
+        else {
+            sendToArray = [
+                {
+                    "name": manualRecipientName,
+                    "email": manualRecipientEmail
+                }
+            ]
+        }
+
         sendgrid(sendFromName, sendFromEmail, subject, sendToArray)
         setSendFromName();
         setSendFromEmail();
         setSendTo();
         setSubject();
+        setManualRecipientEmail();
+        setManualRecipientName();
+        setUseCSVRecipientList(true);
+
         toast('You Sent An Email!', {
             position: "top-right",
             autoClose: 3000,
@@ -124,7 +149,6 @@ function SendEmail() {
             theme: "light",
             type: 'success'
         });
-
     }
 
     return (
@@ -199,14 +223,30 @@ function SendEmail() {
                         </Col>
                         <Col className="px-1" md="5">
                             <FormGroup>
-                                <label>To</label>
-                                <Input
+                                {useCSVRecipientList ? <Label>Upload CSV Below (or <span style={{ color: 'blue', cursor: 'grab' }} onClick={() => { toggleRecipientMethod() }}>click here</span> to enter recipient manually)</Label> : <Label>Enter Recipient Below (or <span style={{ color: 'blue', cursor: 'grab' }} onClick={() => { toggleRecipientMethod() }}>click here</span> to upload via CSV file)</Label>}
+                                {useCSVRecipientList ? <Input
                                     id="fileSelect"
                                     type="file"
                                     size='sm'
                                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                     onChange={changeHandler}
-                                />
+                                /> : <FormGroup >
+                                    <label>Enter Recipient Full Name</label>
+                                    <Input
+                                        style={{ border: '1px solid black' }}
+                                        defaultValue=""
+                                        type="text"
+                                        onChange={(e) => { setManualRecipientName(e.target.value) }}
+                                    />
+                                    <label>Enter Recipient Email</label>
+                                    <Input
+                                        style={{ border: '1px solid black' }}
+                                        defaultValue=""
+                                        type="text"
+                                        onChange={(e) => { setManualRecipientEmail(e.target.value) }}
+                                    />
+                                </FormGroup>}
+
                             </FormGroup>
                         </Col>
                     </Row>
@@ -216,6 +256,8 @@ function SendEmail() {
                         sendFromEmail={sendFromEmail}
                         sendTo={sendTo}
                         template={template}
+                        manualRecipientName={manualRecipientName}
+                        manualRecipientEmail={manualRecipientEmail}
                     />
                 </Form>
             </div>
