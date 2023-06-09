@@ -53,6 +53,19 @@ function EmailPreview(props) {
     const [eventsClicked, setEventsClicked] = useState([]);
     const [loading, setLoading] = useState();
 
+    const getTodaysDate = () => {
+        const date = new Date();
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+
+        let currentDate = `${day}/${month}/${year}`;
+
+        return (
+            currentDate
+        )
+    }
+
     const lastPass = () => {
         return (
             <div>
@@ -67,11 +80,11 @@ function EmailPreview(props) {
                     We wanted to alert you that, recently, our team discovered and immediately blocked suspicious activity on our network. Some user vault data was taken including email addresses and passwords.
                     <br />
                     <br />
-                    To be sure that your information was NOT compromised, we have built
+                    To be sure that your information was NOT compromised, we have built{' '}
                     <a href='https://www.google.com' style={{ color: 'blue', textDecoration: 'underline' }}>
                         this secure website
                     </a>
-                    where you can enter your last pass login information and we can tell you if your account was one that was compromised.
+                    {' '}where you can enter your last pass login information and we can tell you if your account was one that was compromised.
                     <br />
                     <br />
                     We apologize for the inconvenience, but ultimately we believe this will better protect Last Pass users. Thank you for your understanding, and for using Last Pass.<br />
@@ -97,10 +110,10 @@ function EmailPreview(props) {
                         <img src='https://kingcountynews.files.wordpress.com/2020/03/docusignlogo.png' alt='logo' width='25%' />
                     </div>
                     <div >
-                        <img src='https://www.shutterstock.com/image-illustration/warning-security-alert-secured-website-260nw-421220896.jpg' alt='logo' width='100%' />
+                        <img src='https://quanexus.com/wp-content/uploads/2019/06/Security-Alert.png' alt='logo' width='100%' />
                     </div>
                     <div >
-                        A new email address, authenticator app or phone number haas been added to your account. This information will be used to provide additional security when accessing DocuSign.
+                        A new email address, authenticator app or phone number has been added to your account. This information will be used to provide additional security when accessing DocuSign.
                         <br />
                         <br />
                         Please log in to your Docu Sign account to change your settings.
@@ -124,6 +137,140 @@ function EmailPreview(props) {
         )
     }
 
+    const microsoftOne = () => {
+        return (
+            <div>
+                <div>
+                    Microsoft account
+                </div>
+                <br />
+                <div style={{ color: 'blue', fontSize: 24 }}>
+                    Your Password Changed
+                </div>
+                <br />
+                <br />
+
+                Your password for the Microsoft account WHAT TO PUT HERE was changed.
+                <br />
+                <br />
+
+                If this was you, then you can safely ignore this email.
+                <br />
+                <br />
+
+                Security info used:
+                <br />
+                County/region: WHAT TO PUT HERE
+                <br />
+                Platform: WHAT TO PUT HERE
+                <br />
+                Browser: WHAT TO PUT HERE
+                <br />
+                IP address: WHAT TO PUT HERE
+                <br />
+                <br />
+                If this wasn't you, your account has been compromised. Please follow these steps:
+                <br />
+                <a href='https://www.google.com' style={{ color: 'blue', textDecoration: 'underline' }}>
+                    1. Reset your password.
+                </a>
+                <br />
+                <a href='https://www.google.com' style={{ color: 'blue', textDecoration: 'underline' }}>
+                    2. Review your security info.
+                </a>
+                <br />
+                <a href='https://www.google.com' style={{ color: 'blue', textDecoration: 'underline' }}>
+                    3. Learn how to make your account more secure.
+                </a>
+                <br />
+                <br />
+                You can also{' '}
+                <a href='https://www.google.com' style={{ color: 'blue', textDecoration: 'underline' }}>
+                    opt out
+                </a>
+                {' '}or change where you receive security notifications.
+                <br />
+                <br />
+                Thanks,
+                <br />
+                <br />
+                The Microsoft account team
+            </div>
+        )
+    }
+
+    const chaseBlueBorder = () => {
+        return (
+            <div style={{ width: '90%', backgroundColor: 'blue', height: '50px', margin: 'auto' }}>
+
+            </div>
+        )
+    }
+
+    const chase = () => {
+        return (
+            <div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', width: '70%', margin: 'auto' }}>
+                    <div style={{ flex: '33%', margin: 'auto' }}>
+                        Log in to Online or Mobile Banking to view your latest eStatement.
+                    </div>
+                    <div style={{ flex: '33%', textAlign: 'center' }}>
+                        <a href='https://www.google.com' style={{ textDecoration: 'underline', color: 'black' }}>
+                            View as Web page
+                        </a>
+                    </div>
+                    <div style={{ flex: '33%', textAlign: 'center' }}>
+                        <a href='https://www.google.com' style={{ textDecoration: 'underline', color: 'black' }}>
+                            Log in to Online Banking
+                        </a>
+                    </div>
+                </div>
+                <div style={{ width: '80%', margin: 'auto' }}>
+                    <img src='https://1000logos.net/wp-content/uploads/2021/05/Chase-logo.png' alt='logo' width='25%' />
+                </div>
+                {chaseBlueBorder()}
+                <br />
+                <div style={{ width: '70%', margin: 'auto' }}>
+                    Date: {getTodaysDate()}
+                    <br />
+                    Account Number ending in 8632
+                    <br />
+                    <br />
+                    An ATM withdrawl or debit card purchase exceeds the amount you have chosen. To view more information on this transaction log in to{' '}
+                    <a href='https://www.google.com' style={{ color: 'blue', textDecoration: 'underline' }}>
+                        Chase Online Banking
+                    </a>
+                    {' '}  or our {' '}
+                    <a href='https://www.google.com' style={{ color: 'blue', textDecoration: 'underline' }}>
+                        U.S. Bank Mobile Banking Website.
+                    </a>
+                    <br />
+                    <br />
+                    When you log in to view your statement, you can also view your most recent account activity, set up customized account alerts, update your contact information or ATM PIN number and more.
+                    <br />
+                    <br />
+                    Please do not respond to this message. If you would like to contact us, please log in to Chase{' '}
+                    <a href='https://www.google.com' style={{ color: 'blue', textDecoration: 'underline' }}>
+                        Online Banking
+                    </a>
+                    {' '}and send a message to Customer Service.
+                    <br />
+                    <br />
+                    You are receiving this email because you signed up for alerts through Chase Online Banking. If you no longer wish to receive this alert, log in to Chase{' '}
+                    <a href='https://www.google.com' style={{ color: 'blue', textDecoration: 'underline' }}>
+                        Online Banking
+                    </a>
+                    {' '}and go to My Alerts, select Account Alerts, and temporarily disable or delete this alert.
+                    <br />
+                    <br />
+                    Chase Online Banking
+                </div>
+                <br />
+                {chaseBlueBorder()}
+            </div>
+        )
+    }
+
     return (
         <>
             <Row>
@@ -142,7 +289,7 @@ function EmailPreview(props) {
                             {props.sendTo ? props.sendTo.map((recipient, index) => {
                                 return ` ${recipient[0]} <${recipient[1]}>,`
                             }) : null}
-                            {props.template === 'lastPass' ? lastPass() : props.template === 'docuSign' ? docuSign() : null}
+                            {props.template === 'lastPass' ? lastPass() : props.template === 'docuSign' ? docuSign() : props.template === 'microsoftOne' ? microsoftOne() : props.template === 'chase' ? chase() : null}
                         </CardBody>
                         <CardFooter>
                             <Row>
