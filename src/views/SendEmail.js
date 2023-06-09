@@ -21,6 +21,7 @@ import {
     Row,
     Col,
     FormGroup,
+    Label,
     Form,
     Input,
 } from "reactstrap";
@@ -31,17 +32,18 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const lastPass = "<html><body><br><div style='width:100%;background:red;height:10px'></div><div style='text-align: center;'><img src='https://i.pcmag.com/imagery/reviews/01dP5ocnTcOaAH6ehSjwkCf-9.fit_scale.size_760x427.v1569480976.png' alt='logo' width='50%' /></div><div style='width:80%;margin:auto'>Dear Last Pass User,<br><br>We wanted to alert you that, recently, our team discovered and immediately blocked suspicious activity on our network. Some user vault data was taken including email addresses and passwords.<br><br>To be sure that your information was NOT compromised, we have built <a href='https://www.google.com' style='color:blue; text-decoration:underline' }}>this secure website </a> where you can enter your last pass login information and we can tell you if your account was one that was compromised.<br><br>We apologize for the inconvenience, but ultimately we believe this will better protect Last Pass users. Thank you for your understanding, and for using Last Pass.<br><br>Regards,<br>The Last Pass Team</div><br><div style='margin:auto;text-align: center;width:100px;height:40px;background-color:red;color:white;text-decoration:underline;text-decoration-color:blue'>Learn More</div></body></html>"
+
+const docuSign = "<html><body><div><div style='width:80%;margin:auto'><div><img src='https://kingcountynews.files.wordpress.com/2020/03/docusignlogo.png' alt='logo' width='25%'/></div><div ><img src='https://www.shutterstock.com/image-illustration/warning-security-alert-secured-website-260nw-421220896.jpg' alt='logo' width='100%' /></div><div>A new email address, authenticator app or phone number has been added to your account. This information will be used to provide additional security when accessing DocuSign.<br /><br />Please log in to your Docu Sign account to change your settings.</div></div><br /><div style='width:100%;margin:auto;background:lightgrey'><div style='width:80%;margin:auto'>About Docusign<br />Sign Documents electronically in just minutes. It's safe,secure, and legally binding. Whether you're in an office, at home, or on-the-go, --or even across the globe - DocuSign provides a professional trusted solution for Digital Transaction Management.<br /><br /><a href='https://www.google.com' style='color:blue; text-decoration:underline' }}> <img src='https://cdn-icons-png.flaticon.com/512/0/532.png' alt='logo' width='20px' />Download the DocuSign App </a></div></div></body></html>"
+
 function SendEmail() {
     const [sendFromName, setSendFromName] = useState();
     const [sendFromEmail, setSendFromEmail] = useState();
     const [subject, setSubject] = useState();
     const [sendTo, setSendTo] = useState();
+    const [template, setTemplate] = useState('lastPass');
 
     function sendgrid(sendFromName, sendFromEmail, subject, sendToArray) {
-        console.log('send grid');
-        console.log('send from', sendFromName);
-        console.log('send from email', sendFromEmail);
-        console.log('subj', subject)
         return new Promise((resolve, reject) => {
             axios({
                 url: "https://api.brevo.com/v3/smtp/email",
@@ -57,7 +59,7 @@ function SendEmail() {
                         "email": sendFromEmail
                     },
                     "to": sendToArray,
-                    "htmlContent": "<html><body><br><div style='width:100%;background:red;height:10px'></div><div style='text-align: center;'><img src='https://i.pcmag.com/imagery/reviews/01dP5ocnTcOaAH6ehSjwkCf-9.fit_scale.size_760x427.v1569480976.png' alt='logo' width='50%' /></div><div style='width:80%;margin:auto'>Dear Last Pass User,<br><br>We wanted to alert you that, recently, our team discovered and immediately blocked suspicious activity on our network. Some user vault data was taken including email addresses and passwords.<br><br>To be sure that your information was NOT compromised, we have built <a href='https://www.google.com' style='color:blue; text-decoration:underline' }}>this secure website </a> where you can enter your last pass login information and we can tell you if your account was one that was compromised.<br><br>We apologize for the inconvenience, but ultimately we believe this will better protect Last Pass users. Thank you for your understanding, and for using Last Pass.<br><br>Regards,<br>The Last Pass Team</div><br><div style='margin:auto;text-align: center;width:100px;height:40px;background-color:red;color:white;text-decoration:underline;text-decoration-color:blue'>Learn More</div></body></html>",
+                    "htmlContent": template === 'lastPass' ? lastPass : template === 'docuSign' ? docuSign : lastPass,
                     "subject": subject,
                 }
             })
@@ -114,6 +116,21 @@ function SendEmail() {
                 <div>
                     <ToastContainer />
                 </div>
+                <FormGroup tag="fieldset" onChange={(event) => setTemplate(event.target.value)}>
+                    <legend>Choose Your Template</legend>
+                    <FormGroup check>
+                        <Label check>
+                            <Input type="radio" name="radio1" value="lastPass" defaultChecked />{' '}
+                            LastPass
+                        </Label>
+                    </FormGroup>
+                    <FormGroup check>
+                        <Label check>
+                            <Input type="radio" name="radio1" value="docuSign" />{' '}
+                            DocuSign
+                        </Label>
+                    </FormGroup>
+                </FormGroup>
                 <Form onSubmit={handleSubmit}>
                     <Row>
                         <Col className="pr-1" md="5">
@@ -169,6 +186,7 @@ function SendEmail() {
                         sendFromName={sendFromName}
                         sendFromEmail={sendFromEmail}
                         sendTo={sendTo}
+                        template={template}
                     />
                 </Form>
             </div>
